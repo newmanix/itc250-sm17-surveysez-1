@@ -27,7 +27,7 @@ if(isset($_GET['id']) && (int)$_GET['id'] > 0){#proper data must be on querystri
 	myRedirect(VIRTUAL_PATH . "surveys/index.php");
 }
 
-$mySurvey = new SurveySez\MY_Survey($myID); ; //MY_Survey extends survey class so methods can be added
+$mySurvey = new SurveySez\MY_Survey($myID); //MY_Survey extends survey class so methods can be added
 if($mySurvey->isValid)
 {
 	$config->titleTag = "'" . $mySurvey->Title . "' Survey!";
@@ -46,6 +46,8 @@ if($mySurvey->isValid)
 { #check to see if we have a valid SurveyID
 	echo '<p>' . $mySurvey->Description . '</p>';
 	echo $mySurvey->showQuestions();
+    //create response list here
+    echo SurveySez\MY_Survey::responseList($myID);
 }else{
 	echo "Sorry, no such survey!";	
 }
